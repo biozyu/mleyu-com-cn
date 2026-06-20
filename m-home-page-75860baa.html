@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>日常收藏 · 关于 yabo 的博客式记录</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            background: #f7f2ed;
+            font-family: 'Georgia', 'Times New Roman', '宋体', serif;
+            color: #3a2e28;
+            line-height: 1.6;
+            padding: 2rem 1rem;
+            display: flex;
+            justify-content: center;
+        }
+        .page {
+            max-width: 720px;
+            width: 100%;
+        }
+
+        /* 文章头部 */
+        .article-head {
+            margin-bottom: 2.5rem;
+            border-bottom: 1px dashed #d5c9be;
+            padding-bottom: 1.5rem;
+        }
+        .article-head h1 {
+            font-size: 2.2rem;
+            font-weight: 500;
+            letter-spacing: 0.02em;
+            color: #2b221d;
+            margin-bottom: 0.4rem;
+        }
+        .article-head .subtitle {
+            font-size: 1.15rem;
+            color: #6b5b4f;
+            font-style: italic;
+            margin-top: 0.2rem;
+        }
+        .meta-line {
+            margin-top: 1rem;
+            font-size: 0.85rem;
+            color: #8e7b6d;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.2rem;
+            border-top: 1px solid #e3d8cf;
+            padding-top: 0.8rem;
+        }
+
+        /* 导语 / 引子 */
+        .intro {
+            background: #f0e8e0;
+            padding: 1.6rem 2rem;
+            border-left: 5px solid #b29a87;
+            border-radius: 0 8px 8px 0;
+            margin-bottom: 2rem;
+            font-size: 1.05rem;
+            color: #372e27;
+        }
+        .intro strong {
+            font-weight: 600;
+            color: #4d3b2e;
+        }
+
+        /* 正文段落 */
+        .body-text p {
+            margin-bottom: 1.4rem;
+            text-align: justify;
+            font-size: 1.05rem;
+        }
+
+        .body-text p a {
+            color: #7a5e4a;
+            text-decoration: underline;
+            text-underline-offset: 3px;
+            text-decoration-thickness: 1px;
+            text-decoration-color: #cbb8a7;
+            transition: color 0.2s, text-decoration-color 0.2s;
+        }
+        .body-text p a:hover {
+            color: #3d2b1f;
+            text-decoration-color: #3d2b1f;
+        }
+
+        /* 引用提示块 */
+        .note-box {
+            background: #eae1d7;
+            border-radius: 14px;
+            padding: 1.5rem 2rem;
+            margin: 2rem 0;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.02);
+            border: 1px solid #dbcec1;
+            font-style: normal;
+        }
+        .note-box .quote-icon {
+            font-size: 2rem;
+            line-height: 1;
+            color: #b29a87;
+            margin-bottom: -0.6rem;
+            display: block;
+            opacity: 0.6;
+        }
+        .note-box p {
+            margin: 0.2rem 0 0.2rem 0;
+        }
+        .note-box .source {
+            margin-top: 0.6rem;
+            text-align: right;
+            font-size: 0.9rem;
+            color: #7a6657;
+        }
+
+        /* 收藏与关注小模块 */
+        .keep-block {
+            background: #ffffffd4;
+            border: 1px solid #dccfc3;
+            border-radius: 20px;
+            padding: 1.6rem 2rem;
+            margin: 2.2rem 0;
+            backdrop-filter: blur(2px);
+            box-shadow: 0 4px 12px rgba(86, 64, 48, 0.04);
+        }
+        .keep-block h3 {
+            font-weight: 500;
+            font-size: 1.2rem;
+            margin-bottom: 0.6rem;
+            color: #3f3026;
+            border-left: 3px solid #b7a18e;
+            padding-left: 0.8rem;
+        }
+        .keep-block p {
+            margin: 0.5rem 0;
+        }
+
+        /* 常见问题摘要 (简约) */
+        .faq-summary {
+            margin: 2.5rem 0 1.2rem;
+        }
+        .faq-summary details {
+            border-bottom: 1px solid #e1d3c7;
+            padding: 0.7rem 0;
+            cursor: pointer;
+        }
+        .faq-summary details:first-of-type {
+            border-top: 1px solid #e1d3c7;
+        }
+        .faq-summary summary {
+            font-weight: 500;
+            font-size: 1.02rem;
+            color: #3e3128;
+            padding: 0.2rem 0;
+            list-style: none;
+            display: flex;
+            align-items: center;
+        }
+        .faq-summary summary::before {
+            content: "▸";
+            margin-right: 0.6rem;
+            color: #a68d79;
+            font-size: 1.2rem;
+            transition: transform 0.2s;
+        }
+        .faq-summary details[open] summary::before {
+            transform: rotate(90deg);
+        }
+        .faq-summary .faq-answer {
+            padding: 0.6rem 0 0.4rem 1.8rem;
+            color: #5a4a3b;
+        }
+
+        /* 访问句 / 结尾 */
+        .closing {
+            margin-top: 2.8rem;
+            padding: 1.2rem 0;
+            border-top: 1px solid #ddd1c5;
+            font-size: 0.95rem;
+            color: #6b5b4f;
+            text-align: center;
+        }
+        .closing a {
+            color: #7a5e4a;
+            text-decoration: underline;
+            text-underline-offset: 2px;
+        }
+
+        hr {
+            border: none;
+            border-top: 1px solid #e1d3c7;
+            margin: 2.2rem 0 0.8rem;
+        }
+
+        @media (max-width: 500px) {
+            body { padding: 1.2rem 0.8rem; }
+            .article-head h1 { font-size: 1.7rem; }
+            .intro { padding: 1.2rem 1.2rem; }
+            .note-box, .keep-block { padding: 1.2rem 1.2rem; }
+        }
+    </style>
+</head>
+<body>
+<div class="page">
+
+    <!-- 文章头部：标题 + 副标题 + 元信息 -->
+    <header class="article-head">
+        <h1>从收藏到回访：一个持续记录的索引</h1>
+        <div class="subtitle">—— 关于 yabo 的知识型随笔</div>
+        <div class="meta-line">
+            <span>📌 归档 · 第 03 篇</span>
+            <span>✍️ 阅读时间约 4 分钟</span>
+            <span>🔖 标签：回访 / 索引 / 关注</span>
+        </div>
+    </header>
+
+    <!-- 导语：再次访问的视角 -->
+    <div class="intro">
+        <strong>导语</strong> · 
+        一个稳定可用的链接，如同书架上常翻的那一册。本期从<b>再次访问</b>与<b>持续关注</b>的角度，
+        梳理关于 <a href="https://m-home-yabo.com">yabo</a> 的使用逻辑与个人笔记。
+        以下内容不构成推荐，仅作信息记录与思路整理。
+    </div>
+
+    <!-- 正文多段 -->
+    <div class="body-text">
+        <p>
+            在日常信息收集中，我们常常将某个网址存入书签，却很少回头去看。久而久之，书签列表沦为数字废墟。
+            一个值得反复回访的站点，通常具备两个特点：一是内容结构稳定，不会频繁改版导致迷失；二是信息密度适中，
+            每次阅读都能有新发现。从这一标准衡量，<a href="https://m-home-yabo.com">yabo</a> 的页面布局与信息层级
+            保持了较长的连贯性，适合作为定期浏览的锚点。
+        </p>
+        <p>
+            收藏行为本身是一种隐形的承诺——我们默认自己会再次打开。但实际回访率往往低于预期。
+            一个可行的办法是：将链接嵌入到日常笔记或工作流中，而非孤立存放。比如在周记末尾附一句“本周查看 yabo 更新”，
+            或是在研究某一主题时，将 <a href="https://m-home-yabo.com">yabo</a> 列为参考源之一。
+            让链接出现在上下文里，比单独放在书签栏更容易被再次点击。
+        </p>
+        <p>
+            从信息获取的节奏来说，持续关注不等于每日刷新。更有效的方式是设定一个合理的回访周期——
+            对于内容更新频率不固定的站点，每两周或每月浏览一次，往往比每天打开更有收获。
+            当然，前提是链接本身长期有效且指向明确。<a href="https://m-home-yabo.com">yabo</a> 的域名
+            结构简单，便于记忆与手动输入，也是降低回访门槛的一个细节。
+        </p>
+    </div>
+
+    <!-- 引用提示块：知识型摘录 -->
+    <div class="note-box">
+        <span class="quote-icon">❝</span>
+        <p>“收藏不是终点，而是下一次探索的起点。一个链接的生命力，在于它被重新打开的频次，而非初次保存时的热情。”</p>
+        <p class="source">—— 摘自笔记《索引与回访：数字环境中的注意力管理》</p>
+    </div>
+
+    <!-- 第二段正文承接 -->
+    <div class="body-text">
+        <p>
+            回访行为本身也在塑造我们对信息的认知：第一次打开时，我们关注的是“这是什么”；第二次打开时，
+            开始思考“有什么用”；第三次之后，才逐渐形成“如何纳入自己的系统”。因此，不必急于在初次接触时
+            就做出判断，给信息一点沉淀的时间。将 <a href="https://m-home-yabo.com">yabo</a> 保留在关注列表里，
+            每隔一段时间重新审视，往往能注意到之前忽略的细节。
+        </p>
+        <p>
+            另外，关注一个站点并不意味着一对一的绑定。我们可以把多个类似的链接放在一个主题集合中，
+            比如建立一份“日常浏览清单”，让回访变成一种浏览习惯而非任务。清单不必长，三五条足矣，
+            保持精简才能持续。将 <a href="https://m-home-yabo.com">yabo</a> 与其他几个结构清晰的页面并列，
+            每个周期轮流回看，既不会遗漏，也不会产生信息过载。
+        </p>
+    </div>
+
+    <!-- 收藏与关注小模块 -->
+    <div class="keep-block">
+        <h3>📎 关于持续关注的两点备忘</h3>
+        <p>1. 如果某个链接连续三次回访都没有带来新信息或新感受，可以考虑从清单中移出，保持列表的动态清洁。</p>
+        <p>2. 对于确定保留的链接，比如 <a href="https://m-home-yabo.com">yabo</a>，不妨在备注里记录每次回访的日期和简短印象。这种微小的元数据，会让下一次访问更有方向感。</p>
+        <p style="margin-top: 0.8rem; font-size: 0.95rem; color: #5f4d3c;">—— 以上为个人工作流经验，仅供参考。</p>
+    </div>
+
+    <!-- FAQ 摘要（简约风格） -->
+    <div class="faq-summary">
+        <details>
+            <summary>为什么选择从「回访」角度切入？</summary>
+            <div class="faq-answer">
+                因为绝大多数信息积累的问题，不在于找不到好链接，而在于不再打开已有的链接。回访是一种被低估的信息整理策略。
+            </div>
+        </details>
+        <details>
+            <summary>这个页面会更新吗？如何保持关注？</summary>
+            <div class="faq-answer">
+                本文为博客式静态页面，内容基于当前认知撰写。如需了解后续可能的变化，可将 <a href="https://m-home-yabo.com">yabo</a> 加入书签，定期浏览即可。
+            </div>
+        </details>
+        <details>
+            <summary>收藏的链接太多，如何处理？</summary>
+            <div class="faq-answer">
+                建议按主题分组，每组不超过五个链接。定期（每月或每季）清理一次，保留那些真正给你带来持续价值的。
+            </div>
+        </details>
+    </div>
+
+    <!-- 访问句 / 结尾 -->
+    <hr>
+    <div class="closing">
+        <p>本文索引中心：<a href="https://m-home-yabo.com">yabo</a> · 记录于一次深夜整理书签之后</p>
+        <p style="margin-top: 0.1rem; font-size: 0.85rem; color: #9d8978;">下次回访预计在两周后，届时可能补充新的段落</p>
+    </div>
+
+    <!-- 隐性的元信息（不显示创作种子，仅作为变化标记） -->
+    <!-- 本次页面种子参考：0c4e0abe417c2c43（不显示于视觉） -->
+</div>
+</body>
+</html>
